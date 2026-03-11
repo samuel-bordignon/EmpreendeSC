@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+    # Empreende SC
 
-## Getting Started
+Sistema web para cadastro e gerenciamento de empreendimentos no estado de Santa Catarina. Desenvolvido como projeto do programa **IA para DEVs** — uma iniciativa da SCTEC em parceria com o SENAI/SC.
 
-First, run the development server:
+## Descrição
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+O **Empreende SC** é uma aplicação front-end que permite realizar operações CRUD (criar, visualizar, editar e excluir) de empreendimentos catarinenses. Os dados incluem nome do empreendimento e do empreendedor responsável, município, segmento de atuação, contato e status (ativo/inativo).
+
+A interface é totalmente responsiva: no desktop os dados são exibidos em tabela, e no mobile são convertidos em cards para melhor leitura. Os dados são persistidos localmente no navegador via `localStorage`.
+
+### Funcionalidades
+
+- Listagem de empreendimentos em tabela (desktop) ou cards (mobile)
+- Criação de novos empreendimentos via dialog modal
+- Edição de empreendimentos existentes
+- Exclusão com confirmação
+- Validação de formulários com feedback visual
+- Filtro visual por status (Ativo/Inativo) com badges coloridos
+- Persistência local dos dados (localStorage)
+
+## Tecnologias Utilizadas
+
+| Tecnologia | Versão | Finalidade |
+|---|---|---|
+| **Next.js** | 16.1.6 | Framework React com App Router |
+| **React** | 19.2.3 | Biblioteca de UI |
+| **TypeScript** | 5.x | Tipagem estática |
+| **Tailwind CSS** | 4.x | Estilização utility-first |
+| **shadcn/ui** | 4.x | Componentes de interface (Radix + CVA) |
+| **Zod** | 4.x | Validação de schemas |
+| **React Hook Form** | 7.x | Gerenciamento de formulários |
+| **Lucide React** | 0.577 | Ícones |
+| **Vercel** | — | Hospedagem e deploy |
+
+## Estrutura do Projeto
+
+```
+empreende-sc/
+├── app/                          # App Router (Next.js)
+│   ├── layout.tsx                # Layout raiz (fonte Inter, metadata)
+│   ├── page.tsx                  # Página principal (gerencia estado)
+│   └── globals.css               # Estilos globais e tema shadcn
+├── components/
+│   ├── empreendimentos/          # Componentes de domínio
+│   │   ├── empreendimentos-table.tsx        # Tabela + cards mobile
+│   │   ├── create-empreendimento-dialog.tsx # Modal de criação
+│   │   ├── edit-empreendimento-dialog.tsx   # Modal de edição
+│   │   ├── delete-empreendimento-dialog.tsx # Confirmação de exclusão
+│   │   └── empreendimento-form-fields.tsx   # Campos de formulário (compartilhado)
+│   └── ui/                       # Componentes shadcn/ui
+├── hooks/
+│   └── useEmpreendimentos.tsx    # Hook CRUD + schema Zod + localStorage
+├── types/
+│   └── empreendimento.ts        # Tipos TypeScript (Segmento, Status, Empreendimento)
+├── lib/
+│   └── utils.ts                  # Utilitário cn() para classes CSS
+└── package.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Acesso Online
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+A aplicação está hospedada na Vercel e pode ser acessada em:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+> **https://empreende-sc.vercel.app**
 
-## Learn More
+## Execução Local
 
-To learn more about Next.js, take a look at the following resources:
+### Pré-requisitos
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Node.js** 18.18 ou superior
+- **npm**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Passos
 
-## Deploy on Vercel
+```bash
+# 1. Clone o repositório
+git clone https://github.com/SEU_USUARIO/empreende-sc.git
+cd empreende-sc
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# 2. Instale as dependências
+npm install
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# 3. Inicie o servidor de desenvolvimento
+npm run dev
+```
+
+Acesse [http://localhost:3000](http://localhost:3000) no navegador.
+
+### Outros comandos
+
+```bash
+npm run build   # Gera o build de produção
+npm run start   # Inicia o servidor de produção
+npm run lint    # Executa o linter (ESLint)
+```
+
+## Vídeo Pitch
+
+📹 [Assista ao vídeo pitch do projeto](https://LINK_DO_VIDEO_AQUI)
+
