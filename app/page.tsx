@@ -2,7 +2,7 @@
 export default function Home() {
   return (
    <div className="">
-    <p>hello word</p>
+    <p>hello word!</p>
    </div>
   );
 }
