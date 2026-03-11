@@ -6,7 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   CreateEmpreendimentoPayload,
   createEmpreendimentoSchema,
-  useEmpreendimentos,
 } from "@/hooks/useEmpreendimentos";
 import {
   Dialog,
@@ -28,10 +27,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Plus } from "lucide-react";
+import { Empreendimento } from "@/types/empreendimento";
 
-export function CreateEmpreendimentoDialog() {
+interface CreateEmpreendimentoDialogProps {
+  onCreate: (data: Omit<Empreendimento, "id">) => void;
+}
+
+export function CreateEmpreendimentoDialog({ onCreate }: CreateEmpreendimentoDialogProps) {
   const [open, setOpen] = useState(false);
-  const { create } = useEmpreendimentos();
 
   const {
     register,
@@ -45,7 +48,7 @@ export function CreateEmpreendimentoDialog() {
   });
 
   const onSubmit = (data: CreateEmpreendimentoPayload) => {
-    create(data);
+    onCreate(data);
     reset();
     setOpen(false);
   };
@@ -143,6 +146,35 @@ export function CreateEmpreendimentoDialog() {
             {errors.contato && (
               <span className="text-destructive text-sm">
                 {errors.contato.message}
+              </span>
+            )}
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Label>Status</Label>
+            <div className="flex gap-4">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  value="ATIVO"
+                  {...register("status")}
+                  className="accent-primary"
+                />
+                Ativo
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  value="INATIVO"
+                  {...register("status")}
+                  className="accent-primary"
+                />
+                Inativo
+              </label>
+            </div>
+            {errors.status && (
+              <span className="text-destructive text-sm">
+                {errors.status.message}
               </span>
             )}
           </div>
