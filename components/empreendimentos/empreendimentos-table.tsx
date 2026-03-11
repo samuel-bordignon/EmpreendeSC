@@ -121,7 +121,6 @@ export function EmpreendimentosTable({ empreendimentos, onEdit, onRemove }: Empr
           </div>
         ))}
       </div>
-
       {/* Desktop: tabela */}
       <div className="hidden md:block rounded-md border overflow-hidden">
         <Table>
