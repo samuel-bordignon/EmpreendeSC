@@ -10,6 +10,4 @@ export interface Empreendimento {
   segmento: Segmento;
   contato: string;
   status: Status;
-  createdAt: Date;
-  updatedAt: Date;
 }
