@@ -36,7 +36,7 @@ export function DeleteEmpreendimentoDialog({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancelar</AlertDialogCancel>
-          <AlertDialogAction onClick={onConfirm}>
+          <AlertDialogAction onClick={onConfirm} className="bg-rose-600 text-white hover:bg-rose-700">
             Excluir
           </AlertDialogAction>
         </AlertDialogFooter>

@@ -31,7 +31,7 @@ export function CreateEmpreendimentoDialog({ onCreate }: CreateEmpreendimentoDia
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button>
+                <Button className="bg-emerald-600 hover:bg-emerald-700 text-white">
                     <Plus className="mr-2 h-4 w-4" />
                     Novo empreendimento
                 </Button>
@@ -53,7 +53,7 @@ export function CreateEmpreendimentoDialog({ onCreate }: CreateEmpreendimentoDia
                         <Button type="button" variant="outline" onClick={() => setOpen(false)}>
                             Cancelar
                         </Button>
-                        <Button type="submit">Criar</Button>
+                        <Button type="submit" className="bg-emerald-500">Criar</Button>
                     </DialogFooter>
                 </form>
             </DialogContent>

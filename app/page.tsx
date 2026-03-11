@@ -8,9 +8,12 @@ export default function Home() {
   const { empreendimentos, create, edit, remove } = useEmpreendimentos();
 
   return (
-    <div className="p-8 mx-auto max-w-5xl flex flex-col gap-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Empreendimentos</h1>
+    <div className="py-6 sm:py-12 flex flex-col gap-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Empreendimentos</h1>
+          <p className="text-muted-foreground text-sm mt-1">Gerencie os empreendimentos cadastrados em Santa Catarina.</p>
+        </div>
         <CreateEmpreendimentoDialog onCreate={create} />
       </div>
       <EmpreendimentosTable

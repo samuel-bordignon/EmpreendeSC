@@ -81,7 +81,7 @@ export function EditEmpreendimentoDialog({
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
               Cancelar
             </Button>
-            <Button type="submit">Salvar</Button>
+            <Button type="submit" className="bg-emerald-500">Salvar</Button>
           </DialogFooter>
         </form>
       </DialogContent>
