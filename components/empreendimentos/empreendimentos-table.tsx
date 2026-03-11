@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import {
   Table,
   TableBody,
@@ -18,6 +19,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal, Pencil, Trash2 } from "lucide-react";
 import { useEmpreendimentos } from "@/hooks/useEmpreendimentos";
+import { Empreendimento } from "@/types/empreendimento";
+import { EditEmpreendimentoDialog } from "./edit-empreendimento-dialog";
+import { DeleteEmpreendimentoDialog } from "./delete-empreendimento-dialog";
 
 const segmentoLabel: Record<string, string> = {
   TECNOLOGIA: "Tecnologia",
@@ -28,17 +32,12 @@ const segmentoLabel: Record<string, string> = {
 };
 
 export function EmpreendimentosTable() {
-  const { empreendimentos, remove } = useEmpreendimentos();
-
-  const handleEdit = (id: string) => {
-    console.log("editar:", id); // substituir pela lógica de edição
-  };
-
-  const handleDelete = (id: string) => {
-    remove(id);
-  };
+  const { empreendimentos, edit, remove } = useEmpreendimentos();
+  const [editingItem, setEditingItem] = useState<Empreendimento | null>(null);
+  const [deletingItem, setDeletingItem] = useState<Empreendimento | null>(null);
 
   return (
+    <>
     <div className="rounded-md border">
       <Table>
         <TableHeader>
@@ -80,12 +79,12 @@ export function EmpreendimentosTable() {
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
-                    <DropdownMenuItem onClick={() => handleEdit(e.id)}>
+                    <DropdownMenuItem onClick={() => setEditingItem(e)}>
                       <Pencil className="mr-2 h-4 w-4" />
                       Editar
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                      onClick={() => handleDelete(e.id)}
+                      onClick={() => setDeletingItem(e)}
                       className="text-destructive focus:text-destructive"
                     >
                       <Trash2 className="mr-2 h-4 w-4" />
@@ -99,5 +98,27 @@ export function EmpreendimentosTable() {
         </TableBody>
       </Table>
     </div>
+
+    {editingItem && (
+      <EditEmpreendimentoDialog
+        empreendimento={editingItem}
+        open={!!editingItem}
+        onOpenChange={(open) => { if (!open) setEditingItem(null); }}
+        onSave={(id, data) => edit(id, data)}
+      />
+    )}
+
+    {deletingItem && (
+      <DeleteEmpreendimentoDialog
+        nomeEmpreendimento={deletingItem.nomeEmpreendimento}
+        open={!!deletingItem}
+        onOpenChange={(open) => { if (!open) setDeletingItem(null); }}
+        onConfirm={() => {
+          remove(deletingItem.id);
+          setDeletingItem(null);
+        }}
+      />
+    )}
+    </>
   );
 }
