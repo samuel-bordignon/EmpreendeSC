@@ -6,6 +6,7 @@ import { CreateEmpreendimentoPayload, createEmpreendimentoSchema, useEmpreendime
 import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
 import { useState } from "react";
+import { EmpreendimentosTable } from "@/components/empreendimentos/empreendimentos-table";
 
 export default function Home() {
   const { empreendimentos, create } = useEmpreendimentos();
@@ -22,7 +23,7 @@ export default function Home() {
   };
 
   return (
-    <div className="p-8 max-w-md mx-auto">
+    <div className="p-60  mx-auto">
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
         <div>
           <input {...register("nomeEmpreendimento")} placeholder="Nome do empreendimento" className="border p-2 w-full" />
@@ -58,15 +59,6 @@ export default function Home() {
 
         <Button type="submit">Criar empreendimento</Button>
       </form>
-      <ul className="mt-8 flex flex-col gap-2">
-        {empreendimentos.map((e) => (
-          <li key={e.id} className="border p-2 rounded flex ">
-            <p><strong>{e.nomeEmpreendimento}</strong> — {e.nomeEmpreendedor}</p>
-            <p className="text-sm text-gray-500">{e.municipio} · {e.segmento} · {e.status}</p>
-            <Button onClick={() => setIsEditing(true)}><Pencil /></Button>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }
