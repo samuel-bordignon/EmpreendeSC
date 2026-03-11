@@ -17,15 +17,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { EmpreendimentoFormFields } from "./empreendimento-form-fields";
 
 interface EditEmpreendimentoDialogProps {
   empreendimento: Empreendimento;
@@ -78,101 +70,13 @@ export function EditEmpreendimentoDialog({
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="edit-nomeEmpreendimento">Nome do empreendimento</Label>
-            <Input
-              id="edit-nomeEmpreendimento"
-              {...register("nomeEmpreendimento")}
-            />
-            {errors.nomeEmpreendimento && (
-              <span className="text-destructive text-sm">
-                {errors.nomeEmpreendimento.message}
-              </span>
-            )}
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="edit-nomeEmpreendedor">Nome do empreendedor</Label>
-            <Input
-              id="edit-nomeEmpreendedor"
-              {...register("nomeEmpreendedor")}
-            />
-            {errors.nomeEmpreendedor && (
-              <span className="text-destructive text-sm">
-                {errors.nomeEmpreendedor.message}
-              </span>
-            )}
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="edit-municipio">Município</Label>
-            <Input id="edit-municipio" {...register("municipio")} />
-            {errors.municipio && (
-              <span className="text-destructive text-sm">
-                {errors.municipio.message}
-              </span>
-            )}
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <Label>Segmento</Label>
-            <Select
-              defaultValue={empreendimento.segmento}
-              onValueChange={(value) =>
-                setValue("segmento", value as CreateEmpreendimentoPayload["segmento"])
-              }
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Selecione um segmento" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="TECNOLOGIA">Tecnologia</SelectItem>
-                <SelectItem value="COMERCIO">Comércio</SelectItem>
-                <SelectItem value="INDUSTRIA">Indústria</SelectItem>
-                <SelectItem value="SERVICOS">Serviços</SelectItem>
-                <SelectItem value="AGRONEGOCIO">Agronegócio</SelectItem>
-              </SelectContent>
-            </Select>
-            {errors.segmento && (
-              <span className="text-destructive text-sm">
-                {errors.segmento.message}
-              </span>
-            )}
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="edit-contato">Contato</Label>
-            <Input id="edit-contato" {...register("contato")} />
-            {errors.contato && (
-              <span className="text-destructive text-sm">
-                {errors.contato.message}
-              </span>
-            )}
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <Label>Status</Label>
-            <Select
-              defaultValue={empreendimento.status}
-              onValueChange={(value) =>
-                setValue("status", value as CreateEmpreendimentoPayload["status"])
-              }
-            >
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="ATIVO">Ativo</SelectItem>
-                <SelectItem value="INATIVO">Inativo</SelectItem>
-              </SelectContent>
-            </Select>
-            {errors.status && (
-              <span className="text-destructive text-sm">
-                {errors.status.message}
-              </span>
-            )}
-          </div>
-
+          <EmpreendimentoFormFields
+            register={register}
+            errors={errors}
+            setValue={setValue}
+            prefix="edit-"
+            defaultSegmento={empreendimento.segmento}
+          />
           <DialogFooter>
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
               Cancelar
