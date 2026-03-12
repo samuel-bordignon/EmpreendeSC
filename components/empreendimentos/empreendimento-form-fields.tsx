@@ -2,6 +2,8 @@
 
 import { UseFormRegister, FieldErrors, UseFormSetValue } from "react-hook-form";
 import { CreateEmpreendimentoPayload } from "@/hooks/useEmpreendimentos";
+import { SEGMENTO_LABELS, STATUS_LABELS } from "@/lib/constants";
+import { Segmento, Status } from "@/types/empreendimento";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -83,11 +85,9 @@ export function EmpreendimentoFormFields({
             <SelectValue placeholder="Selecione um segmento" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="TECNOLOGIA">Tecnologia</SelectItem>
-            <SelectItem value="COMERCIO">Comércio</SelectItem>
-            <SelectItem value="INDUSTRIA">Indústria</SelectItem>
-            <SelectItem value="SERVICOS">Serviços</SelectItem>
-            <SelectItem value="AGRONEGOCIO">Agronegócio</SelectItem>
+            {Object.entries(SEGMENTO_LABELS).map(([value, label]) => (
+              <SelectItem key={value} value={value}>{label}</SelectItem>
+            ))}
           </SelectContent>
         </Select>
         {errors.segmento && (
@@ -114,24 +114,17 @@ export function EmpreendimentoFormFields({
       <div className="flex flex-col gap-2">
         <Label>Status</Label>
         <div className="flex gap-4">
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input
-              type="radio"
-              value="ATIVO"
-              {...register("status")}
-              className="accent-primary"
-            />
-            Ativo
-          </label>
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input
-              type="radio"
-              value="INATIVO"
-              {...register("status")}
-              className="accent-primary"
-            />
-            Inativo
-          </label>
+          {Object.entries(STATUS_LABELS).map(([value, label]) => (
+            <label key={value} className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="radio"
+                value={value}
+                {...register("status")}
+                className="accent-primary"
+              />
+              {label}
+            </label>
+          ))}
         </div>
         {errors.status && (
           <span className="text-destructive text-sm">

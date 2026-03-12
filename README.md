@@ -74,7 +74,7 @@ A aplicação está hospedada na Vercel e pode ser acessada em:
 
 ```bash
 # 1. Clone o repositório
-git clone https://github.com/SEU_USUARIO/empreende-sc.git
+git clone https://github.com/samuel-bordignon/empreende-sc.git
 cd empreende-sc
 
 # 2. Instale as dependências
