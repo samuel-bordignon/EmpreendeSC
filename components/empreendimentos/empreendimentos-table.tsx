@@ -7,16 +7,9 @@ import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal, Pencil, Trash2 } from "lucide-react";
 import { Empreendimento } from "@/types/empreendimento";
+import { SEGMENTO_LABELS } from "@/lib/constants";
 import { EditEmpreendimentoDialog } from "./edit-empreendimento-dialog";
 import { DeleteEmpreendimentoDialog } from "./delete-empreendimento-dialog";
-
-const segmentoLabel: Record<string, string> = {
-  TECNOLOGIA: "Tecnologia",
-  COMERCIO: "Comércio",
-  INDUSTRIA: "Indústria",
-  SERVICOS: "Serviços",
-  AGRONEGOCIO: "Agronegócio",
-};
 
 function StatusBadge({ status }: { status: string }) {
   const isAtivo = status === "ATIVO";
@@ -111,7 +104,7 @@ export function EmpreendimentosTable({ empreendimentos, onEdit, onRemove }: Empr
               </div>
               <div>
                 <span className="text-muted-foreground">Segmento</span>
-                <p>{segmentoLabel[e.segmento]}</p>
+                <p>{SEGMENTO_LABELS[e.segmento]}</p>
               </div>
               <div className="col-span-2">
                 <span className="text-muted-foreground">Contato</span>
@@ -142,7 +135,7 @@ export function EmpreendimentosTable({ empreendimentos, onEdit, onRemove }: Empr
                 <TableCell className="font-medium">{e.nomeEmpreendimento}</TableCell>
                 <TableCell>{e.nomeEmpreendedor}</TableCell>
                 <TableCell>{e.municipio}</TableCell>
-                <TableCell>{segmentoLabel[e.segmento]}</TableCell>
+                <TableCell>{SEGMENTO_LABELS[e.segmento]}</TableCell>
                 <TableCell>{e.contato}</TableCell>
                 <TableCell>
                   <StatusBadge status={e.status} />

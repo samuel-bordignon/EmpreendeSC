@@ -24,13 +24,21 @@ export const useEmpreendimentos = () => {
   const [empreendimentos, setEmpreendimentos] = useState<Empreendimento[]>([]);
 
   useEffect(() => {
-    const data = localStorage.getItem(STORAGE_KEY);
-    if (data) setEmpreendimentos(JSON.parse(data));
+    try {
+      const data = localStorage.getItem(STORAGE_KEY);
+      if (data) setEmpreendimentos(JSON.parse(data));
+    } catch {
+      console.error("Erro ao carregar dados do localStorage");
+    }
   }, []);
 
   const persist = (data: Empreendimento[]) => {
     setEmpreendimentos(data);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } catch {
+      console.error("Erro ao salvar dados no localStorage");
+    }
   };
 
   const create = (data: Omit<Empreendimento, "id">) => {
@@ -40,8 +48,9 @@ export const useEmpreendimentos = () => {
   };
 
   const edit = (id: string, data: Partial<Omit<Empreendimento, "id">>) => {
+    const validated = createEmpreendimentoSchema.partial().parse(data);
     const atualizados = empreendimentos.map((e) =>
-      e.id === id ? { ...e, ...data } : e
+      e.id === id ? { ...e, ...validated } : e
     );
     persist(atualizados);
   };
