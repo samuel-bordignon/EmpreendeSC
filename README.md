@@ -1,4 +1,4 @@
-    # Empreende SC
+# Empreende SC
 
 Sistema web para cadastro e gerenciamento de empreendimentos no estado de Santa Catarina. Desenvolvido como projeto do programa **IA para DEVs** — uma iniciativa da SCTEC em parceria com o SENAI/SC.
 
