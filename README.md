@@ -96,5 +96,5 @@ npm run lint    # Executa o linter (ESLint)
 
 ## Vídeo Pitch
 
-📹 [Assista ao vídeo pitch do projeto](https://LINK_DO_VIDEO_AQUI)
+📹 [Assista ao vídeo pitch do projeto]([https://LINK_DO_VIDEO_AQUI](https://youtu.be/GsO3GG1tL5s?si=4nBWOojrLQwKCWgf))
 
